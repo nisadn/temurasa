@@ -1,11 +1,8 @@
-import { Box, Button, Center, Flex, FormControl, FormErrorMessage, Select, Text, Textarea } from '@chakra-ui/react'
+import { Button, Flex, Select, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { HiHeart } from 'react-icons/hi'
 
-import styles from '../../styles/Home.module.css'
-import Layout from '../Layout/Layout';
+import BackgroundLayout from '../Layout/BackgroundLayout';
 import Navbar from '../Menu/Navbar';
 
 const Home = () => {
@@ -18,7 +15,7 @@ const Home = () => {
     }
 
     return (
-    <div className={styles.home}>
+    <BackgroundLayout title={'Welcome to TemuRasa!'}>
         <Navbar page='home' />
         <Flex color='white' w='full' 
             align='center' 
@@ -54,7 +51,7 @@ const Home = () => {
                 </form>
             </Flex>
         </Flex>
-    </div>
+    </BackgroundLayout>
     )
 }
 

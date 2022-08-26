@@ -58,8 +58,8 @@ const Navbar = ({page}) => {
                     <p className="tracking-widest">TemuRasa</p>
                 </Flex>
                 <Flex display={['none', 'none', 'flex']} gap={2} >
-                <NavbarMenu page={page} href='/' isActive={page == 'home'}>Home</NavbarMenu>
-                <NavbarMenu page={page} href='/login' isActive={page == 'login'} >Login</NavbarMenu>
+                <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
+                <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
                 </Flex>
                 <IconButton 
                     aria-label="open-menu" 
@@ -79,8 +79,8 @@ const Navbar = ({page}) => {
             <DrawerCloseButton mt='4' mr='5' />
             <DrawerBody>
                     <Flex direction='column' gap={5} my='15%' mx='10%'>
-                    <NavbarMenu page={page} href='/' isActive={page == 'home'}>Home</NavbarMenu>
-                    <NavbarMenu page={page} href='/login' isActive={page == 'login'} >Login</NavbarMenu>
+                    <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
+                    <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
                     </Flex>
             </DrawerBody>
             </DrawerContent>
