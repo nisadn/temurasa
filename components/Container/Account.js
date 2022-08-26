@@ -37,7 +37,7 @@ const Account = ({isRegister}) => {
                         >
                         <Text as='span' fontSize='xl' fontWeight='bold'>{isRegister ? 'Register' : 'Login'}</Text>
                             {isRegister && <FormControl isInvalid={errors.name !== undefined} mt='4'>
-                            <FormLabel fontWeight={'semibold'}>Full Name</FormLabel>
+                            <FormLabel fontWeight={'semibold'}>Name</FormLabel>
                                 <Input 
                                     bg='white'
                                     placeholder='Enter name' 
@@ -49,12 +49,13 @@ const Account = ({isRegister}) => {
                                 <FormErrorMessage>This field is required</FormErrorMessage>
                             </FormControl>}
 
-                            <FormControl isInvalid={errors.username !== undefined} mt='4'>
-                            <FormLabel fontWeight={'semibold'}>Username</FormLabel>
+                            <FormControl isInvalid={errors.email !== undefined} mt='4'>
+                            <FormLabel fontWeight={'semibold'}>Email</FormLabel>
                                 <Input 
                                     bg='white'
-                                    placeholder='Enter username' 
-                                    {...register("username", {
+                                    placeholder='Enter email'
+                                    type='email' 
+                                    {...register("email", {
                                         required: true, 
                                         maxLength: 100
                                     })} 
