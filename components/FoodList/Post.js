@@ -1,4 +1,5 @@
 import { Stack, Badge } from "@chakra-ui/react";
+/* eslint-disable @next/next/no-img-element */
 import { HiHeart } from "react-icons/hi";
 
 const Post = ({ val }) => {
@@ -9,6 +10,9 @@ const Post = ({ val }) => {
           className="rounded-md object-cover w-full h-48"
           src="/assets/images/RujakCingur.jpg"
           alt=""
+          // width='900px'
+          // height='1100px'
+          // objectFit="cover"
         />
         <p className="font-semibold text-black text-xl mt-2">{val.name}</p>
         <Stack direction="row" className="mt-2">

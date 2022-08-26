@@ -1,17 +1,22 @@
 import { Badge, Box, Button, Checkbox, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import GallerySet from "../../components/Gallery/Gallery";
 import Layout from "../../components/Layout/Layout";
 import Post from "../../components/Review/Post";
 import ReviewModal from "../../components/Review/ReviewModal";
 import styles from '../../styles/Home.module.css';
+import Image from 'next/image';
 
 const ReviewPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
-        <Layout>
+        <Layout
+            title="Detail Review"
+            desc="Showing user reviews regarding certain resto"
+        >
             <Flex direction='column' w='full' align='center'>
-                <Flex direction='column' w='80%' gap='10'>
-                <Flex bg='white' borderRadius='2rem' px='10' py='8' boxShadow='md'>
+                <Flex direction='column' w={['95%','90%','80%']} gap='10'>
+                <Flex bg='white' direction={['column','row','row']} borderRadius='2rem' px='10' py='8' boxShadow='md' gap='4'>
                     <Flex w='full' direction='column' justify='center' gap='2' >
                         <Text fontWeight='bold' fontSize='3xl'>{makanan.name}</Text>
                         <Text color='blue.500' fontWeight='medium'>{makanan.location}</Text>
@@ -23,9 +28,15 @@ const ReviewPage = () => {
                             ))}
                         </Box>
                     </Flex>
-                    <Flex w='65%' >
-                        <img src='https://bit.ly/dan-abramov' alt='Dan Abramov' className={styles.imgReview} />
+                    <Flex w={['100%','65%','65%']} >
+                        <Image src='https://bit.ly/dan-abramov' alt='Dan Abramov' 
+                            className={styles.imgReview} 
+                            width='500px' height='300px'
+                        />
                     </Flex>
+                </Flex>
+                <Flex>
+                    <GallerySet />
                 </Flex>
                 <Flex direction='column' w='full' >
                     <Flex h='fit-content' mb='2'>

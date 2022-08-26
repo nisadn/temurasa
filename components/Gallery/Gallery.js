@@ -1,13 +1,12 @@
 import React, { useState, useCallback } from "react";
+React.useLayoutEffect = React.useEffect;
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
-import { photos } from "./photos";
+import { photos } from "./Photos";
 
 // https://codepen.io/neptunian/pen/Oxraod
-// ini udah gallery dan preview image
-// ini dah enak tapi kok ga di tengah yak :(
 
-export default function Gallery2() {
+export default function GallerySet() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
@@ -28,7 +27,7 @@ export default function Gallery2() {
         {viewerIsOpen ? (
           <Modal onClose={closeLightbox}>
             <Carousel
-              className="justify-center"
+              // className="place-content-center bg-blue-200"
               currentIndex={currentImage}
               views={photos.map((x) => ({
                 ...x,
