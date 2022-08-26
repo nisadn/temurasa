@@ -1,12 +1,16 @@
 import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup, Select, Stack, Textarea } from "@chakra-ui/react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 const ReviewModal = ({isOpen, onClose}) => {
     const { register, handleSubmit, formState: { errors }, control } = useForm();
+    const [ like, setLike ] = useState(false);
 
     const onSubmit = data => {
           console.log(data);
     }
+
+    // console.log(errors);
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} size={['xs','lg','xl']}>
@@ -28,8 +32,8 @@ const ReviewModal = ({isOpen, onClose}) => {
                                 value={value} 
                             >
                             <Stack direction='row' gap='3'>
-                                <Radio value='user' borderColor='gray.400'>User</Radio>
-                                <Radio value='admin' borderColor='gray.400'>Admin</Radio>
+                                <Radio value='english' borderColor='gray.400'>English</Radio>
+                                <Radio value='bahasa' borderColor='gray.400'>Bahasa</Radio>
                             </Stack>
                             </RadioGroup>
                             )}
@@ -57,9 +61,13 @@ const ReviewModal = ({isOpen, onClose}) => {
                                 onChange={onChange} 
                                 value={value} 
                             >
-                            <Stack direction='row' gap='3'>
-                                <Radio value='yes' borderColor='gray.400'>Yes</Radio>
-                                <Radio value='no' borderColor='gray.400'>No</Radio>
+                            <Stack direction='row' gap='3' >
+                                <Radio value='yes' borderColor='gray.400' 
+                                    onClick={() => setLike(true)}
+                                >Yes</Radio>
+                                <Radio value='no' borderColor='gray.400' 
+                                    onClick={() => setLike(false)}
+                                >No</Radio>
                             </Stack>
                             </RadioGroup>
                             )}
@@ -67,7 +75,7 @@ const ReviewModal = ({isOpen, onClose}) => {
                     <FormErrorMessage>This field is required</FormErrorMessage>
                 </FormControl>
 
-                <FormControl 
+                {like && <FormControl 
                     isInvalid={errors.favorite !== undefined}
                 >
                     <FormLabel fontWeight={'semibold'}>Category</FormLabel>
@@ -80,7 +88,7 @@ const ReviewModal = ({isOpen, onClose}) => {
                         ))}
                     </Select>
                     <FormErrorMessage>This field is required</FormErrorMessage>
-                </FormControl>
+                </FormControl>}
                 </Flex>
             </ModalBody>
 
