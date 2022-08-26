@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Layout from "../components/Layout/Layout";
+import Layout from "../../components/Layout/Layout";
 import {
   Input,
   InputGroup,
@@ -12,7 +12,7 @@ import {
 import { HiSearch, HiHeart } from "react-icons/hi";
 import Image from "next/image";
 
-export default function RestoListPage() {
+export default function FoodListPage() {
   return (
     <Layout
       title={"Welcome to TemuRasa!"}
@@ -20,7 +20,7 @@ export default function RestoListPage() {
     >
       <div className="w-full items-center justify-center">
         <p className="font-semibold text-black lg:text-5xl text-2xl text-center">
-          Recomended Restaurants in{" "}
+          Recomended Food in{" "}
           <span className="font-semibold text-primary lg:text-5xl text-2xl text-center">
             Madura
           </span>
@@ -45,21 +45,6 @@ export default function RestoListPage() {
       <div className="lg:flex mt-8">
         <div className="lg:w-2/12 w-full">
           <p className="font-semibold text-black text-xl mb-2">Filters</p>
-          <p className="font-medium text-black text-lg mb-2">Location</p>
-          <InputGroup width={"200px"}>
-            <Input
-              placeholder="Search"
-              borderRadius={"3xl"}
-              borderColor={"#D6D6D6"}
-              borderWidth={"2px"}
-              backgroundColor={"#FFFFFF"}
-            />
-            <InputRightElement
-              // eslint-disable-next-line react/no-children-prop
-              children={<Box as={HiSearch} color="#000000" size={24} />}
-            ></InputRightElement>
-          </InputGroup>
-          <p className="font-medium text-black text-lg mb-2 mt-2">Foods</p>
           <Stack spacing={2} direction="column">
             <Checkbox
               colorScheme="blue"
@@ -122,10 +107,10 @@ export default function RestoListPage() {
               </p>
               <p className="font-medium text-white-400 text-base mt-2 text-justify">
                 Cingur is taken from the Madurese regional language which means
-                mouth. This food has a salty taste, and is served with a variety
-                of ingredients such as cucumber, jicama, young mango, plus rice
-                cake, tofu, tempe, cingur, sprouts, water spinach, and long
-                beans.
+                mouth. This food has a salty taste, and is served with a
+                variety of ingredients such as cucumber, jicama, young mango,
+                plus rice cake, tofu, tempe, cingur, sprouts, water spinach, and
+                long beans.
               </p>
             </div>
           </div>
@@ -173,7 +158,7 @@ export default function RestoListPage() {
               </p>
               <p className="font-medium text-white-400 text-base mt-2 text-justify">
                 Cingur is taken from the Madurese regional language which means
-                mouth.
+                mouth. 
               </p>
             </div>
           </div>
@@ -221,8 +206,8 @@ export default function RestoListPage() {
               </p>
               <p className="font-medium text-white-400 text-base mt-2 text-justify">
                 Cingur is taken from the Madurese regional language which means
-                mouth. This food has a salty taste, and is served with a variety
-                of ingredients such as cucumber, jicama
+                mouth. This food has a salty taste, and is served with a
+                variety of ingredients such as cucumber, jicama
               </p>
             </div>
           </div>
@@ -317,8 +302,8 @@ export default function RestoListPage() {
               </p>
               <p className="font-medium text-white-400 text-base mt-2 text-justify">
                 Cingur is taken from the Madurese regional language which means
-                mouth. This food has a salty taste, and is served with a variety
-                of ingredients such as cucumber, jicama
+                mouth. This food has a salty taste, and is served with a
+                variety of ingredients such as cucumber, jicama
               </p>
             </div>
           </div>
