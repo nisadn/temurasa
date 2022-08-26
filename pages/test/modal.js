@@ -5,7 +5,7 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 
 // https://www.cluemediator.com/how-to-set-a-modal-popup-with-an-image-in-react
-// gatau kenapa tapi kok di load pas pertama lama , tapi abis di next bisa2 aja
+// ini modal buat preview image, gatau kenapa tapi kok di load pas pertama lama , tapi abis di next bisa2 aja
 export default function Modal() {
   const [isOpen, setIsOpen] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
