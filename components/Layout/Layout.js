@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Navbar from "../Menu/Navbar";
 
 const Layout = ({ title, desc, children }) => {
   return (
@@ -12,7 +13,8 @@ const Layout = ({ title, desc, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="px-20 py-16">{children}</div>
+      <Navbar />
+      <div className="p-20">{children}</div>
     </div>
   );
 };

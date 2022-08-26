@@ -6,6 +6,7 @@ import { HiHeart } from 'react-icons/hi'
 
 import styles from '../../styles/Home.module.css'
 import Layout from '../Layout/Layout';
+import Navbar from '../Menu/Navbar';
 
 const Home = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -18,6 +19,7 @@ const Home = () => {
 
     return (
     <div className={styles.home}>
+        <Navbar page='home' />
         <Flex color='white' w='full' 
             align='center' 
             // textAlign='center' 
