@@ -1,11 +1,10 @@
 import React, { useState, useCallback } from "react";
+React.useLayoutEffect = React.useEffect;
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
 import { photos } from "./Photos";
 
 // https://codepen.io/neptunian/pen/Oxraod
-// ini udah gallery dan preview image
-// ini dah enak tapi kok ga di tengah yak :(
 
 export default function GallerySet() {
   const [currentImage, setCurrentImage] = useState(0);

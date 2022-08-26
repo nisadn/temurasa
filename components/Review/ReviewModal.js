@@ -7,7 +7,10 @@ const ReviewModal = ({isOpen, onClose}) => {
     const [ like, setLike ] = useState(false);
 
     const onSubmit = data => {
-          console.log(data);
+        if (!like) {
+            delete data['favorite'];
+        }
+        console.log(data);
     }
 
     // console.log(errors);
@@ -62,12 +65,16 @@ const ReviewModal = ({isOpen, onClose}) => {
                                 value={value} 
                             >
                             <Stack direction='row' gap='3' >
-                                <Radio value='yes' borderColor='gray.400' 
-                                    onClick={() => setLike(true)}
-                                >Yes</Radio>
-                                <Radio value='no' borderColor='gray.400' 
-                                    onClick={() => setLike(false)}
-                                >No</Radio>
+                                <span onClick={() => setLike(true)}>
+                                    <Radio value='yes' borderColor='gray.400' 
+                                        // onClick={() => setLike(true)}
+                                    >Yes</Radio>
+                                </span>
+                                <span onClick={() => setLike(false)}>
+                                    <Radio value='no' borderColor='gray.400' 
+                                        // onClick={() => setLike(false)}
+                                    >No</Radio>
+                                </span>
                             </Stack>
                             </RadioGroup>
                             )}

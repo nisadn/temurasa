@@ -10,7 +10,10 @@ const ReviewPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
-        <Layout>
+        <Layout
+            title="Detail Review"
+            desc="Showing user reviews regarding certain resto"
+        >
             <Flex direction='column' w='full' align='center'>
                 <Flex direction='column' w={['95%','90%','80%']} gap='10'>
                 <Flex bg='white' direction={['column','row','row']} borderRadius='2rem' px='10' py='8' boxShadow='md' gap='4'>
