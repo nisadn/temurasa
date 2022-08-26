@@ -8,11 +8,21 @@ import {
   Stack,
   Checkbox,
   Badge,
+  Select,
+  Flex,
+  Text,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 import { HiSearch, HiHeart } from "react-icons/hi";
-import Image from "next/image";
+import Post from "../../components/RestoList/Post";
 
-export default function RestoListPage() {
+const RestoPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   return (
     <Layout
       title={"Welcome to TemuRasa!"}
@@ -44,333 +54,99 @@ export default function RestoListPage() {
       </div>
       <div className="lg:flex mt-8">
         <div className="lg:w-2/12 w-full">
-          <p className="font-semibold text-black text-xl mb-2">Filters</p>
           <p className="font-medium text-black text-lg mb-2">Location</p>
-          <InputGroup width={"200px"}>
-            <Input
-              placeholder="Search"
-              borderRadius={"3xl"}
-              borderColor={"#D6D6D6"}
-              borderWidth={"2px"}
-              backgroundColor={"#FFFFFF"}
-            />
-            <InputRightElement
-              // eslint-disable-next-line react/no-children-prop
-              children={<Box as={HiSearch} color="#000000" size={24} />}
-            ></InputRightElement>
-          </InputGroup>
+          <Flex direction="column" w="200px" gap="1">
+            <Select
+              placeholder="Select option"
+              w="full"
+              borderColor="blue.600"
+              {...register("location", { required: true })}
+            >
+              {locations.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
+                </option>
+              ))}
+            </Select>
+            {errors.location?.type === "required" && (
+              <Text color="red.500">Please select your destination</Text>
+            )}
+          </Flex>
           <p className="font-medium text-black text-lg mb-2 mt-2">Foods</p>
           <Stack spacing={2} direction="column">
-            <Checkbox
-              colorScheme="blue"
-              className="font-medium text-black text-xl"
-              defaultChecked
-            >
-              Checkbox
-            </Checkbox>
-            <Checkbox
-              colorScheme="blue"
-              className="font-medium text-black text-xl"
-              defaultChecked
-            >
-              Checkbox
-            </Checkbox>
+            {filters.map((val) => (
+              <Checkbox
+                colorScheme="blue"
+                className="font-medium text-black text-xl"
+                defaultChecked
+                key={val.id}
+              >
+                {val.name}
+              </Checkbox>
+            ))}
           </Stack>
         </div>
         <div className="lg:w-10/12 w-full lg:flex lg:flex-wrap gap-4">
-          <div className="lg:w-1/5 w-full h-max-content bg-white rounded-2xl px-4 py-4 mb-4">
-            <div className="w-full items-center justify-center">
-              <img
-                className="rounded-md object-cover w-full h-48"
-                src="/assets/images/RujakCingur.jpg"
-                alt=""
-              />
-              <p className="font-semibold text-black text-xl mt-2">
-                Rujak Cingur
-              </p>
-              <Stack direction="row" className="mt-2">
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Food
-                </Badge>
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Spicy
-                </Badge>
-              </Stack>
-              <div className="flex align-middle mt-2">
-                <HiHeart
-                  color="#e11d48
-"
-                  borderColor="#000000"
-                  size={20}
-                />
-                <p className="font-medium text-white-400 text-sm ml-1">
-                  100 likes
-                </p>
-              </div>
-              <p className="font-semibold text-black text-lg mt-2">
-                Description
-              </p>
-              <p className="font-medium text-white-400 text-base mt-2 text-justify">
-                Cingur is taken from the Madurese regional language which means
-                mouth. This food has a salty taste, and is served with a variety
-                of ingredients such as cucumber, jicama, young mango, plus rice
-                cake, tofu, tempe, cingur, sprouts, water spinach, and long
-                beans.
-              </p>
-            </div>
-          </div>
-          <div className="lg:w-1/5 w-full h-max-content bg-white rounded-2xl px-4 py-4 mb-4">
-            <div className="w-full items-center justify-center">
-              <img
-                className="rounded-md object-cover w-full h-48"
-                src="/assets/images/RujakCingur.jpg"
-                alt=""
-              />
-              <p className="font-semibold text-black text-xl mt-2">
-                Rujak Cingur
-              </p>
-              <Stack direction="row" className="mt-2">
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Food
-                </Badge>
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Spicy
-                </Badge>
-              </Stack>
-              <div className="flex align-middle mt-2">
-                <HiHeart
-                  color="#e11d48
-"
-                  borderColor="#000000"
-                  size={20}
-                />
-                <p className="font-medium text-white-400 text-sm ml-1">
-                  100 likes
-                </p>
-              </div>
-              <p className="font-semibold text-black text-lg mt-2">
-                Description
-              </p>
-              <p className="font-medium text-white-400 text-base mt-2 text-justify">
-                Cingur is taken from the Madurese regional language which means
-                mouth.
-              </p>
-            </div>
-          </div>
-          <div className="lg:w-1/5 w-full h-max-content bg-white rounded-2xl px-4 py-4 mb-4">
-            <div className="w-full items-center justify-center">
-              <img
-                className="rounded-md object-cover w-full h-48"
-                src="/assets/images/RujakCingur.jpg"
-                alt=""
-              />
-              <p className="font-semibold text-black text-xl mt-2">
-                Rujak Cingur
-              </p>
-              <Stack direction="row" className="mt-2">
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Food
-                </Badge>
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Spicy
-                </Badge>
-              </Stack>
-              <div className="flex align-middle mt-2">
-                <HiHeart
-                  color="#e11d48
-"
-                  borderColor="#000000"
-                  size={20}
-                />
-                <p className="font-medium text-white-400 text-sm ml-1">
-                  100 likes
-                </p>
-              </div>
-              <p className="font-semibold text-black text-lg mt-2">
-                Description
-              </p>
-              <p className="font-medium text-white-400 text-base mt-2 text-justify">
-                Cingur is taken from the Madurese regional language which means
-                mouth. This food has a salty taste, and is served with a variety
-                of ingredients such as cucumber, jicama
-              </p>
-            </div>
-          </div>
-          <div className="lg:w-1/5 w-full h-max-content bg-white rounded-2xl px-4 py-4 mb-4">
-            <div className="w-full items-center justify-center">
-              <img
-                className="rounded-md object-cover w-full h-48"
-                src="/assets/images/RujakCingur.jpg"
-                alt=""
-              />
-              <p className="font-semibold text-black text-xl mt-2">
-                Rujak Cingur
-              </p>
-              <Stack direction="row" className="mt-2">
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Food
-                </Badge>
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Spicy
-                </Badge>
-              </Stack>
-              <div className="flex align-middle mt-2">
-                <HiHeart
-                  color="#e11d48
-"
-                  borderColor="#000000"
-                  size={20}
-                />
-                <p className="font-medium text-white-400 text-sm ml-1">
-                  100 likes
-                </p>
-              </div>
-              <p className="font-semibold text-black text-lg mt-2">
-                Description
-              </p>
-              <p className="font-medium text-white-400 text-base mt-2 text-justify">
-                Cingur is taken
-              </p>
-            </div>
-          </div>
-          <div className="lg:w-1/5 w-full h-max-content bg-white rounded-2xl px-4 py-4 mb-4">
-            <div className="w-full items-center justify-center">
-              <img
-                className="rounded-md object-cover w-full h-48"
-                src="/assets/images/RujakCingur.jpg"
-                alt=""
-              />
-              <p className="font-semibold text-black text-xl mt-2">
-                Rujak Cingur
-              </p>
-              <Stack direction="row" className="mt-2">
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Food
-                </Badge>
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Spicy
-                </Badge>
-              </Stack>
-              <div className="flex align-middle mt-2">
-                <HiHeart
-                  color="#e11d48
-"
-                  borderColor="#000000"
-                  size={20}
-                />
-                <p className="font-medium text-white-400 text-sm ml-1">
-                  100 likes
-                </p>
-              </div>
-              <p className="font-semibold text-black text-lg mt-2">
-                Description
-              </p>
-              <p className="font-medium text-white-400 text-base mt-2 text-justify">
-                Cingur is taken from the Madurese regional language which means
-                mouth. This food has a salty taste, and is served with a variety
-                of ingredients such as cucumber, jicama
-              </p>
-            </div>
-          </div>
-          <div className="lg:w-1/5 w-full h-max-content bg-white rounded-2xl px-4 pt-3 mb-4">
-            <div className="w-full items-center justify-center">
-              <img
-                className="rounded-md object-cover w-full h-48"
-                src="/assets/images/RujakCingur.jpg"
-                alt=""
-              />
-              <p className="font-semibold text-black text-xl mt-2">
-                Rujak Cingur
-              </p>
-              <Stack direction="row" className="mt-2">
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Food
-                </Badge>
-                <Badge
-                  variant="subtle"
-                  rounded="xl"
-                  className="lg:px-8 lg:text-lg text-sm"
-                  colorScheme="blue"
-                >
-                  Spicy
-                </Badge>
-              </Stack>
-              <div className="flex align-middle mt-2">
-                <HiHeart
-                  color="#e11d48
-"
-                  borderColor="#000000"
-                  size={20}
-                />
-                <p className="font-medium text-white-400 text-sm ml-1">
-                  100 likes
-                </p>
-              </div>
-              <p className="font-semibold text-black text-lg mt-2">
-                Description
-              </p>
-              <p className="font-medium text-white-400 text-base mt-2 text-justify">
-                Cingur is taken
-              </p>
-            </div>
-          </div>
+          {resto.map((val) => (
+            <Post val={val} key={val.id} />
+          ))}
         </div>
       </div>
     </Layout>
   );
-}
+};
+
+export default RestoPage;
+
+const filters = [
+  {
+    id: "1",
+    name: "Sate",
+  },
+  {
+    id: "2",
+    name: "Campur",
+  },
+  {
+    id: "3",
+    name: "Rujak",
+  },
+];
+
+const locations = [
+  {
+    id: "1",
+    name: "Madura",
+  },
+  {
+    id: "2",
+    name: "Palembang",
+  },
+  {
+    id: "3",
+    name: "Bali",
+  },
+];
+const resto = [
+  {
+    id: "1",
+    name: "Sate Lalat Pak Kandes",
+    badge: ["Lontong", "Sate"],
+    image: "/assets/images/RujakCingur.jpg",
+    reviews: 24,
+  },
+  {
+    id: "2",
+    name: "Soto Pak Abas",
+    badge: ["Lontong", "Sate"],
+    image: "/assets/images/RujakCingur.jpg",
+    reviews: 14,
+  },
+  {
+    id: "3",
+    name: "Rujak Cingur",
+    badge: ["Lontong", "Sate"],
+    image: "/assets/images/RujakCingur.jpg",
+    reviews: 27,
+  },
+];
