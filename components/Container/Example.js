@@ -2,7 +2,7 @@ import { Box, Button, Flex, FormControl, FormErrorMessage, Textarea } from '@cha
 import { useForm } from 'react-hook-form';
 import { HiHeart } from 'react-icons/hi'
 
-const Home = () => {
+const Example = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
   
     const onSubmit = data => {
@@ -45,4 +45,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Example;

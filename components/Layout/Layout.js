@@ -1,9 +1,8 @@
-import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 
 const Layout = ({ title, desc, children }) => {
   return (
-    <div className="bg-white-200">
+    <div className="bg-white-200 min-h-screen">
       <Head>
         <title>{title ? title : "Create Next App"}</title>
         <meta
@@ -13,7 +12,7 @@ const Layout = ({ title, desc, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="px-20 py-6">{children}</div>
+      <div className="px-20 py-16">{children}</div>
     </div>
   );
 };
