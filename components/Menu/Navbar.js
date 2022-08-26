@@ -53,8 +53,8 @@ const Navbar = ({page}) => {
             px={4} py={3}
             color={page === 'home' ? 'white' : 'black'}
         >
-            <Flex gap={2} align='center' w='full' px='4' >
-                <Flex w='full' fontWeight='bold' fontSize='2xl' pl='4'>
+            <Flex gap={2} align='center' w='full' px={[0,0,4]} >
+                <Flex w='full' fontWeight='bold' fontSize='3xl' pl={[2,2,4]}>
                     <p className="tracking-widest">TemuRasa</p>
                 </Flex>
                 <Flex display={['none', 'none', 'flex']} gap={2} >
@@ -65,9 +65,10 @@ const Navbar = ({page}) => {
                     aria-label="open-menu" 
                     size='lg' 
                     mr='2' 
-                    icon={<HiMenu />} 
+                    icon={<HiMenu color={page === 'home' ? "white" : 'black'} />} 
                     display={['flex', 'flex', 'none']}
                     onClick={handleClick}
+                    variant='ghost'
                 />
             </Flex>
 

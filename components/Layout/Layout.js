@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import Head from "next/head";
 import Navbar from "../Menu/Navbar";
 
@@ -14,7 +15,7 @@ const Layout = ({ title, desc, children }) => {
       </Head>
 
       <Navbar />
-      <div className="p-20">{children}</div>
+      <Box py='20' px={[5,10,20]}>{children}</Box>
     </div>
   );
 };

@@ -22,19 +22,19 @@ const Home = () => {
         <Navbar page='home' />
         <Flex color='white' w='full' 
             align='center' 
-            // textAlign='center' 
+            textAlign='center' 
             justify='center' 
             direction='column' h='full' gap='4'
         >
-            <Flex direction='column' fontSize='5xl' fontWeight='bold'>
+            <Flex direction='column' fontSize={['3xl','4xl','5xl']} fontWeight='bold'>
                 <Text>Discover Your Taste</Text>
-                <Text>Wherever You Going</Text>
+                <Text>Wherever You're Going</Text>
             </Flex>
-            <Flex fontSize='xl'>Let’s find the best food of your destination in Indonesia with us.</Flex>
-            <Flex direction='column' align='left' bg='white' color='black' px='10' py='6'
-                w={['90%','70%','50%']} borderRadius='3xl' gap='2' mt='10'
+            <Flex fontSize={['lg','lg','xl']} px='6'>Let’s find the best food of your destination in Indonesia with us.</Flex>
+            <Flex direction='column' align='left' bg='white' color='black' px={[5,8,10]} py={[4,6,6]}
+                w={['90%','70%','50%']} borderRadius='3xl' gap='2' mt='10' textAlign='left'
             >
-                <Text fontWeight='semibold' fontSize='lg'>Where are you going?</Text>
+                <Text fontWeight='semibold' fontSize='lg'>Where do you want to go?</Text>
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <Flex gap='2' mb='2'>
                     <Flex direction='column' w='full' gap='1'>

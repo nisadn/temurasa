@@ -10,8 +10,8 @@ const ReviewPage = () => {
     return (
         <Layout>
             <Flex direction='column' w='full' align='center'>
-                <Flex direction='column' w='80%' gap='10'>
-                <Flex bg='white' borderRadius='2rem' px='10' py='8' boxShadow='md'>
+                <Flex direction='column' w={['95%','90%','80%']} gap='10'>
+                <Flex bg='white' direction={['column','row','row']} borderRadius='2rem' px='10' py='8' boxShadow='md' gap='4'>
                     <Flex w='full' direction='column' justify='center' gap='2' >
                         <Text fontWeight='bold' fontSize='3xl'>{makanan.name}</Text>
                         <Text color='blue.500' fontWeight='medium'>{makanan.location}</Text>
@@ -23,7 +23,7 @@ const ReviewPage = () => {
                             ))}
                         </Box>
                     </Flex>
-                    <Flex w='65%' >
+                    <Flex w={['100%','65%','65%']} >
                         <img src='https://bit.ly/dan-abramov' alt='Dan Abramov' className={styles.imgReview} />
                     </Flex>
                 </Flex>
