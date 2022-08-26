@@ -1,8 +1,10 @@
 import { Badge, Box, Button, Checkbox, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import GallerySet from "../../components/Gallery/Gallery";
 import Layout from "../../components/Layout/Layout";
 import Post from "../../components/Review/Post";
 import ReviewModal from "../../components/Review/ReviewModal";
 import styles from '../../styles/Home.module.css';
+import Image from 'next/image';
 
 const ReviewPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,8 +26,14 @@ const ReviewPage = () => {
                         </Box>
                     </Flex>
                     <Flex w={['100%','65%','65%']} >
-                        <img src='https://bit.ly/dan-abramov' alt='Dan Abramov' className={styles.imgReview} />
+                        <Image src='https://bit.ly/dan-abramov' alt='Dan Abramov' 
+                            className={styles.imgReview} 
+                            width='500px' height='300px'
+                        />
                     </Flex>
+                </Flex>
+                <Flex>
+                    <GallerySet />
                 </Flex>
                 <Flex direction='column' w='full' >
                     <Flex h='fit-content' mb='2'>

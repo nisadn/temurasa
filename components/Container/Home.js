@@ -28,7 +28,7 @@ const Home = () => {
         >
             <Flex direction='column' fontSize={['3xl','4xl','5xl']} fontWeight='bold'>
                 <Text>Discover Your Taste</Text>
-                <Text>Wherever You're Going</Text>
+                <Text>Wherever You&apos;re Going</Text>
             </Flex>
             <Flex fontSize={['lg','lg','xl']} px='6'>Let’s find the best food of your destination in Indonesia with us.</Flex>
             <Flex direction='column' align='left' bg='white' color='black' px={[5,8,10]} py={[4,6,6]}

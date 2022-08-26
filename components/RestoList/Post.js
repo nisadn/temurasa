@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Stack, Badge } from "@chakra-ui/react";
 
 const Post = ({ val }) => {
