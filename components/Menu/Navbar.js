@@ -1,8 +1,10 @@
 import { HiMenu } from "react-icons/hi";
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Flex, IconButton, useDisclosure } from "@chakra-ui/react"
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Flex, IconButton, useDisclosure, useToast } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import NavbarMenu from "./NavbarMenu";
 import { useSelector } from 'react-redux';
+import { logout } from "../../redux/features/authSlice";
+import { useDispatch } from "react-redux";
 
 const Navbar = ({page}) => {
 
@@ -35,7 +37,9 @@ const Navbar = ({page}) => {
         };
     }, [setIsShadowVisible]);
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const toast = useToast();
+    const dispatch = useDispatch();
 
     const handleClick = () => {
         onOpen()
@@ -63,7 +67,17 @@ const Navbar = ({page}) => {
                 <Flex display={['none', 'none', 'flex']} gap={2} >
                 <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
                 {isLogin ? 
-                    <NavbarMenu page={page} href='/' >Logout</NavbarMenu>
+                    <NavbarMenu page={page} onClick={() => {
+                        dispatch(logout());
+                        toast({
+                          title: "Successfully logged out",
+                          status: 'success',
+                          variant: 'left-accent',
+                          position: 'top',
+                          duration: 3000,
+                          isClosable: true,
+                        })
+                    }} >Logout</NavbarMenu>
                 : 
                     <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
                 }
@@ -88,7 +102,17 @@ const Navbar = ({page}) => {
                     <Flex direction='column' gap={5} my='15%' mx='10%'>
                     <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
                     {isLogin ? 
-                        <NavbarMenu page={page} href='/' >Logout</NavbarMenu>
+                        <NavbarMenu page={page} onClick={() => {
+                            dispatch(logout());
+                            toast({
+                              title: "Successfully logged out",
+                              status: 'success',
+                              variant: 'left-accent',
+                              position: 'top',
+                              duration: 3000,
+                              isClosable: true,
+                            })
+                        }} >Logout</NavbarMenu>
                     : 
                         <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
                     }
