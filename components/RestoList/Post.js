@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Stack, Badge } from "@chakra-ui/react";
+import { Stack, Badge, Checkbox } from "@chakra-ui/react";
 
 const Post = ({ val }) => {
   return (
@@ -30,3 +30,4 @@ const Post = ({ val }) => {
 };
 
 export default Post;
+
