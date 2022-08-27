@@ -6,14 +6,14 @@ const Post = ({val}) => {
     return (
         <Flex gap='4' key={val.id}>
             <Flex h='fit-content'>
-                <Image src={val.profile} alt={val.name} className={styles.imgReviewProfile} width='50px' height='50px' />
+                <Flex bg='blue.500' color='white' borderRadius='full' align='center' justify='center' w='50px' h='50px' fontSize='2xl' fontWeight='bold'>{val.user.name.substring(0,1)}</Flex>
             </Flex>
             <Flex w='full' direction='column'>
-                <Text fontWeight='bold' color='blue.600'>{val.name}</Text>
-                <Text>{val.review}</Text>
-                {val.img && 
+                <Text fontWeight='bold' >{val.user.name}</Text>
+                <Text>{val.content}</Text>
+                {val.image && 
                     <Flex w='fit-content' mt='4'>
-                        <Image src={val.img} alt={val.name} className={styles.imgReviewImage} width='450px' height='250px' />
+                        <Image src={val.image} alt={val.id} className={styles.imgReviewImage} width='450px' height='250px' />
                     </Flex>
                 }
             </Flex>
