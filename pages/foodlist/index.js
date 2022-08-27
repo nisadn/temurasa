@@ -9,10 +9,10 @@ import {
   Checkbox,
   Badge,
 } from "@chakra-ui/react";
-import { HiSearch, HiHeart } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
 import Post from "../../components/FoodList/Post";
 
-const FoodPage = () => {
+const AllFoodPage = () => {
   return (
     <Layout
       title={"Welcome to TemuRasa!"}
@@ -42,9 +42,9 @@ const FoodPage = () => {
           ></InputRightElement>
         </InputGroup>
       </div>
-      <Post />
+      <Post isAllFoods />
     </Layout>
   );
 };
 
-export default FoodPage;
+export default AllFoodPage;

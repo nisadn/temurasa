@@ -52,6 +52,7 @@ const RestoPage = () => {
           ></InputRightElement>
         </InputGroup>
       </div>
+
       <div className="lg:flex mt-8">
         <div className="lg:w-2/12 w-full">
           <p className="font-medium text-black text-lg mb-2">Location</p>
@@ -72,6 +73,7 @@ const RestoPage = () => {
               <Text color="red.500">Please select your destination</Text>
             )}
           </Flex>
+
           <p className="font-medium text-black text-lg mb-2 mt-2">Foods</p>
           <Stack spacing={2} direction="column">
             {filters.map((val) => (
@@ -127,6 +129,7 @@ const locations = [
     name: "Bali",
   },
 ];
+
 const resto = [
   {
     id: "1",
