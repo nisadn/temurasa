@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Layout from "../components/Layout/Layout";
+import Layout from "../../components/Layout/Layout";
 import {
   Input,
   InputGroup,
@@ -10,7 +10,7 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { HiSearch } from "react-icons/hi";
-import Post from "../components/FoodList/Post";
+import Post from "../../components/FoodList/Post";
 
 const AllFoodPage = () => {
   return (
