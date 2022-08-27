@@ -20,11 +20,11 @@ const Reviews = ({ id }) => {
     //     console.log(data);
     // }
 
-    return status === 'success' && data ? <>
-        {data.data.map((val) => (
+    return status === 'success' ? 
+        data.data.length > 0 ? data.data.map((val) => (
             <Post val={val} key={val.id} />
-        ))}
-    </> : status === 'success' ? <div>This restaurant has no reviews yet.</div> : <p>Loading...</p>
+        )) : <div>This restaurant has no review yet.</div>
+    : <p>Loading...</p>
 }
 
 const ReviewPage = () => {
