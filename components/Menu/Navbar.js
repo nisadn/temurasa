@@ -2,6 +2,7 @@ import { HiMenu } from "react-icons/hi";
 import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Flex, IconButton, useDisclosure } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import NavbarMenu from "./NavbarMenu";
+import { useSelector } from 'react-redux';
 
 const Navbar = ({page}) => {
 
@@ -40,6 +41,8 @@ const Navbar = ({page}) => {
         onOpen()
     }
 
+    const isLogin = useSelector((state) => state.auth.isLogin);
+
     return (
         <Flex direction='column'>
         <Flex
@@ -59,7 +62,11 @@ const Navbar = ({page}) => {
                 </Flex>
                 <Flex display={['none', 'none', 'flex']} gap={2} >
                 <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
-                <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
+                {isLogin ? 
+                    <NavbarMenu page={page} href='/' >Logout</NavbarMenu>
+                : 
+                    <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
+                }
                 </Flex>
                 <IconButton 
                     aria-label="open-menu" 
@@ -80,7 +87,11 @@ const Navbar = ({page}) => {
             <DrawerBody>
                     <Flex direction='column' gap={5} my='15%' mx='10%'>
                     <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
-                    <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
+                    {isLogin ? 
+                        <NavbarMenu page={page} href='/' >Logout</NavbarMenu>
+                    : 
+                        <NavbarMenu page={page} href='/login' >Login</NavbarMenu>
+                    }
                     </Flex>
             </DrawerBody>
             </DrawerContent>
