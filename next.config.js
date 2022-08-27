@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images : {
-    domains : ['bit.ly'] // <== Domain name
+    domains : ['bit.ly', 'firebasestorage.googleapis.com', 'picsum.photos'] // <== Domain name
   }
 }
 

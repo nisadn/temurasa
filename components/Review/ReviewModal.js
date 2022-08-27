@@ -23,11 +23,11 @@ const ReviewModal = ({isOpen, onClose}) => {
             delete data['favorite'];
         }
         console.log(data);
-        formData.append("language", data.language);
-        formData.append("content", data.content);
-        formData.append("like", data.like === 'yes');
-        if (file !== undefined) formData.append('file', file);
-        if (data.favorite) formData.append('favorite', data.favorite);
+        // formData.append("language", data.language);
+        // formData.append("content", data.content);
+        // formData.append("like", data.like === 'yes');
+        // if (file !== undefined) formData.append('file', file);
+        // if (data.favorite) formData.append('favorite', data.favorite);
     }
 
     return (
