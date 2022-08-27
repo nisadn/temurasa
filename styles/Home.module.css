@@ -35,3 +35,25 @@
   object-position: 100% 100%;
   border-radius: 2rem;
 }
+
+.dropzone {
+  background-color: #ffffff;
+  border: 1px dashed #9aadba;
+  box-sizing: border-box;
+  border-radius: 6px;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgReviewDropzone {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 6px;
+}
