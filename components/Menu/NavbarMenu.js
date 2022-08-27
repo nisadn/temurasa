@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 
-const NavbarMenu = ({ children, href, isActive, page }) => {
+const NavbarMenu = ({ children, href, isActive, page, onClick }) => {
 
     return (
         <Flex
@@ -20,6 +20,7 @@ const NavbarMenu = ({ children, href, isActive, page }) => {
                 transition: '0.3s',
                 bg: `${!isActive && (page === 'home' ? 'gray.600' : 'blue.100')}`,
             }}
+            onClick={onClick}
         >
             <Text align='center' w='100%' px={2}>
                 {children}
