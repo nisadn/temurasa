@@ -4,16 +4,15 @@ import styles from '../../styles/Home.module.css';
 import CustomIcon from "../Icon/CustomIcon";
 import { BiEditAlt, BiTrash } from 'react-icons/bi';
 import RemoveModal from "../Modal/RemoveModal";
-import EditModal from "../Modal/EditModal";
 import { FaStar } from 'react-icons/fa';
 import { useSelector } from "react-redux";
+import ReviewModal from "./ReviewModal";
 
-const Post = ({val}) => {
+const Post = ({val, rId}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { isOpen:isOpenEdit, onOpen:onOpenEdit, onClose:onCloseEdit } = useDisclosure();
     const isLogin = useSelector((state) => state.auth.isLogin);
-    const role = useSelector((state) => state.auth.account.role);
-    const owner = useSelector((state) => state.auth.account.id);
+    const user = useSelector((state) => state.auth.account);
 
     return (
         <Flex gap='4' key={val.id}>
@@ -24,9 +23,10 @@ const Post = ({val}) => {
                 <Flex>
                     <Text fontWeight='bold' w='full' >{val.user.name}</Text>
                     <Flex gap='2'>
-                        {isLogin && (owner === val.user.id || role === 'admin') && <CustomIcon as={BiEditAlt} color='blue.500' activeCol="blue.700" onClick={onOpenEdit} />}
-                        <EditModal isOpen={isOpenEdit} onClose={onCloseEdit} isUpdate review={val} />
-                        {isLogin && (owner === val.user.id || role === 'admin') && <CustomIcon as={BiTrash} color='red.500' activeCol="red.700" onClick={onOpen} />}
+                        {isLogin && (user.user.id === val.user.id || user.user.role === 'admin') && <CustomIcon as={BiEditAlt} color='blue.500' activeCol="blue.700" onClick={onOpenEdit} />}
+                        <ReviewModal onClose={onCloseEdit} isOpen={isOpenEdit} rId={rId} isUpdate defaultReview={val} />
+                        {/* <EditModal isOpen={isOpenEdit} onClose={onCloseEdit} isUpdate review={val} /> */}
+                        {isLogin && (user.user.id === val.user.id || user.user.role === 'admin') && <CustomIcon as={BiTrash} color='red.500' activeCol="red.700" onClick={onOpen} />}
                         <RemoveModal isOpen={isOpen} onClose={onClose} id={val.id} />
                     </Flex>
                 </Flex>

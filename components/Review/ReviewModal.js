@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup, Select, Stack, Textarea } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Radio, RadioGroup, Select, Stack, Textarea, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Dropzone from "../Input/Dropzone";
 import styles from '../../styles/Home.module.css';
+import { reviewApi } from "../../config/services/reviewApi";
+import { useMutation } from "react-query";
+import { useRouter } from "next/router";
 
-const ReviewModal = ({isOpen, onClose}) => {
+const ReviewModal = ({isOpen, onClose, categories, rId, isUpdate, defaultReview}) => {
     const { register, handleSubmit, formState: { errors }, control } = useForm();
     const [ like, setLike ] = useState(false);
 
@@ -17,52 +20,76 @@ const ReviewModal = ({isOpen, onClose}) => {
     
     const FormData = require('form-data');
     const formData = new FormData();
+
+    const toast = useToast();
+    const router = useRouter();
+
+    const postReview = async (data) => {
+        let res;
+        if (isUpdate) {
+            res = await reviewApi.editReview(defaultReview?.id, data);
+        } else {
+            res = await reviewApi.postReview(data);
+        }
+        return res;
+    }
+
+    const mutation = useMutation(postReview, {
+        onError: (err) => {
+            toast({
+                title: `${err.response.data.message}`,
+                status: 'error',
+                variant: 'left-accent',
+                position: 'top',
+                duration: 3000,
+                isClosable: true,
+            });
+        },
+        onSuccess: () => {
+            toast({
+                title: `Successfully ${isUpdate ? 'update' : 'post'} review`,
+                variant: 'left-accent',
+                status: 'success',
+                position: 'top',
+                duration: 3000,
+                isClosable: true,
+            });
+        }
+    });
     
     const onSubmit = data => {
+        if (filePreview.preview === '') {
+            delete data['file'];
+        }
+
+        data['restaurantId'] = rId;
+        delete data['like'];
         if (!like) {
             delete data['favorite'];
         }
         console.log(data);
-        // formData.append("language", data.language);
-        // formData.append("content", data.content);
-        // formData.append("like", data.like === 'yes');
+        mutation.mutate(data);
         // if (file !== undefined) formData.append('file', file);
-        // if (data.favorite) formData.append('favorite', data.favorite);
+    }
+
+    if (mutation.isSuccess) {
+        router.reload();
     }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} size={['xs','xl','2xl']}>
             <ModalOverlay />
             <ModalContent px='4' py='2' textAlign='center'>
-            <ModalHeader fontSize='xl' pb='1'>Add Review</ModalHeader>
+            <ModalHeader fontSize='xl' pb='1'>{isUpdate ? 'Update' : 'Add'} Review</ModalHeader>
             <form onSubmit={handleSubmit(onSubmit)}>
             <ModalBody pt='4'>
                 <Flex direction='column' gap='6'>
-
-                <FormControl
-                    isInvalid={errors.language !== undefined}
-                >
-                    <FormLabel fontWeight={'semibold'}>Pick your language <span className="text-red-400">*</span></FormLabel>
-                    <Controller name='language' control={control} rules={{ required: true }}
-                        render={({ field: { onChange, value } }) => (
-                            <RadioGroup 
-                                onChange={onChange} 
-                                value={value} 
-                            >
-                            <Stack direction='row' gap='3'>
-                                <Radio value='english' borderColor='gray.400'>English</Radio>
-                                <Radio value='bahasa' borderColor='gray.400'>Bahasa</Radio>
-                            </Stack>
-                            </RadioGroup>
-                            )}
-                    />
-                    <FormErrorMessage>This field is required</FormErrorMessage>
-                </FormControl>
 
                 <FormControl isInvalid={errors.content !== undefined}>
                     <FormLabel fontWeight={'semibold'}>Write your review <span className="text-red-400">*</span></FormLabel>
                     <Textarea
                         placeholder='Write here'
+                        defaultValue={defaultReview?.content}
                         minHeight={['300px','200px','150px']}
                         {...register("content", {required: true})}
                     />
@@ -88,14 +115,35 @@ const ReviewModal = ({isOpen, onClose}) => {
                     <p className="text-base font-semibold text-black">Current Image</p>
                     {filePreview.preview !== '' ? (
                         <img src={filePreview?.preview} alt='preview' className={styles.imgReviewDropzone} />
-                    ) : (
+                    ) : isUpdate && defaultReview?.image ?
+                        <img src={defaultReview.image} alt='preview' className={styles.imgReviewDropzone} />
+                    : (
                     <div className="text-base font-normal text-black flex items-center flex flex-row space-x-1">
                         <p>Current Image is</p> <span className="font-semibold"> Empty</span>
                     </div>
                     )}
                 </div>
 
-
+                {!isUpdate && <>
+                
+                <FormControl isInvalid={errors.rating !== undefined}>
+                    <FormLabel fontWeight={'semibold'}>Rating <span className="text-red-400">*</span></FormLabel>
+                    <Controller name='rating' control={control} rules={{ required: true }}
+                        render={({ field: { onChange, value } }) => (
+                            <NumberInput min={0} max={5} w='fit-content'>
+                                <NumberInputField placeholder="Input 0-5 rating" 
+                                    onChange={onChange} 
+                                    value={value} 
+                                />
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
+                            )}
+                    />
+                    <FormErrorMessage>This field is required</FormErrorMessage>
+                </FormControl>
 
                 <FormControl
                     isInvalid={errors.like !== undefined}
@@ -124,26 +172,27 @@ const ReviewModal = ({isOpen, onClose}) => {
                 </FormControl>
 
                 {like && <FormControl 
-                    isInvalid={errors.favorite !== undefined}
+                    isInvalid={errors.mostLikeFood !== undefined}
                 >
                     <FormLabel fontWeight={'semibold'}>Pick your favorite dish <span className="text-red-400">*</span></FormLabel>
                     <Select
                         placeholder='Select one'
-                        {...register("favorite", {required: true})}
+                        {...register("mostLikeFood", {required: true})}
                     >
-                        {categories.map((val) => (
-                            <option value={val.id} key={val.id}>{val.name}</option>
+                        {categories.map((val, idx) => (
+                            <option value={val} key={idx}>{val}</option>
                         ))}
                     </Select>
                     <FormErrorMessage>This field is required</FormErrorMessage>
-                </FormControl>}
+                </FormControl>}</>
+                }
                 </Flex>
             </ModalBody>
 
             <ModalFooter justifyContent='center' gap='4'>
                 <Button px='10' type='submit' colorScheme='blue'
-                    // isLoading={mutation.isLoading} 
-                >Submit</Button>
+                    isLoading={mutation.isLoading} 
+                >{isUpdate ? 'Save' : 'Submit'}</Button>
                 <Button px='10' onClick={onClose}>Cancel</Button>
             </ModalFooter>
             </form>
@@ -153,14 +202,3 @@ const ReviewModal = ({isOpen, onClose}) => {
 }
 
 export default ReviewModal;
-
-const categories = [{
-    id: '1',
-    name: 'Gudeg',
-},{
-    id: '2',
-    name: 'Mi Jawa',
-},{
-    id: '3',
-    name: 'Lumpia',
-}]

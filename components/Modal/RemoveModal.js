@@ -2,6 +2,7 @@ import { Button, Modal, ModalContent, ModalFooter, ModalHeader, ModalOverlay, us
 import { useRouter } from "next/router";
 import React from "react";
 import { useMutation } from "react-query";
+import { reviewApi } from "../../config/services/reviewApi";
 
 const RemoveModal = (props) => {
     const { isOpen, onClose, id } = props;
@@ -9,8 +10,8 @@ const RemoveModal = (props) => {
     const router = useRouter();
 
     const deleteObject = async (id) => {
-        // const res = await threadApi.delete(id);
-        // return res.data;
+        const res = await reviewApi.deleteReview(id);
+        return res.data;
     }
 
     const mutation = useMutation(deleteObject, {
@@ -37,7 +38,7 @@ const RemoveModal = (props) => {
     });
 
     const handleDelete = () => {
-        // mutation.mutate(id);
+        mutation.mutate(id);
     }
 
     if (mutation.isSuccess) {
