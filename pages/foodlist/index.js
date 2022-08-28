@@ -21,7 +21,7 @@ const AllFoodPage = (props) => {
     >
       <div className="w-full items-center justify-center">
         <p className="font-semibold text-black lg:text-5xl text-2xl text-center">
-          Recomended Food in{" "}
+          Recommended Food in{" "}
           <span className="font-semibold text-primary lg:text-5xl text-2xl text-center">
             Indonesia
           </span>

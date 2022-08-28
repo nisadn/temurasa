@@ -9,4 +9,12 @@ export const restoApi = {
             return Promise.reject(error);
         }
     },
+    getRestoByLoc: async (id) => {
+        try {
+            const res = await axiosClient.get(`/v1/restaurants?locationId=${id}`);
+            return res.data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    },
 }
