@@ -1,18 +1,42 @@
 /* eslint-disable @next/next/no-img-element */
-import Layout from "../../components/Layout/Layout";
 import {
   Input,
   InputGroup,
   InputRightElement,
-  Box,
-  Stack,
-  Checkbox,
-  Badge,
+  Box
 } from "@chakra-ui/react";
-import { HiSearch, HiHeart } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
+import { useQuery } from 'react-query';
+import { useRouter } from "next/router";
+import { foodApi } from "../../config/services/foodApi";
 import Post from "../../components/FoodList/Post";
+import Layout from "../../components/Layout/Layout";
+
+const Foods = ({ id }) => {
+  const getFoods = async () => {
+    console.log("masuk")
+    const res = await foodApi.getFood(id);
+    return res.data;
+    console.log(res.data)
+  }
+
+  const { status, data, error } = useQuery("foods", getFoods);
+
+  // if(status === 'success') {
+  //   console.log(data);
+  // }
+
+  return status === 'success' && <>
+    {data.data.map((val) => (
+      <Post val={val} key={val.id} />
+    ))} </>
+}
 
 const FoodPage = () => {
+  const router = useRouter();
+  const id = router.query.id;
+  console.log("id", id)
+
   return (
     <Layout
       title={"Welcome to TemuRasa!"}
@@ -42,7 +66,8 @@ const FoodPage = () => {
           ></InputRightElement>
         </InputGroup>
       </div>
-      <Post />
+      {/* <Post /> */}
+      <Foods id={id} />
     </Layout>
   );
 };

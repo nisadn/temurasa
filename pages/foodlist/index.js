@@ -11,8 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { HiSearch } from "react-icons/hi";
 import Post from "../../components/FoodList/Post";
+import { useState } from "react";
 
-const AllFoodPage = () => {
+const AllFoodPage = (props) => {
   return (
     <Layout
       title={"Welcome to TemuRasa!"}
@@ -22,7 +23,7 @@ const AllFoodPage = () => {
         <p className="font-semibold text-black lg:text-5xl text-2xl text-center">
           Recomended Food in{" "}
           <span className="font-semibold text-primary lg:text-5xl text-2xl text-center">
-            Madura
+            Indonesia
           </span>
         </p>
       </div>
