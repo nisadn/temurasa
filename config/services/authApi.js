@@ -17,4 +17,12 @@ export const authApi = {
             return Promise.reject(error);
         }
     },
+    refresh: async (data) => {
+        try {
+            const res = await axiosClient.post('/v1/auth/refresh-tokens', data);
+            return res.data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    },
 }

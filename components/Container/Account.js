@@ -50,7 +50,6 @@ const Account = ({isRegister}) => {
     });
 
     const onSubmit = data => {
-        console.log(data);
         mutation.mutate(data);
     }
 
