@@ -3,10 +3,11 @@ import { store } from '../redux/store';
 
 const axiosClient = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
+    // headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json',
+    // }
+    headers:{"Accept":"application/json, text/plain, /","Content-Type": "multipart/form-data"}
 });
 
 axiosClient.interceptors.request.use((config) => {
