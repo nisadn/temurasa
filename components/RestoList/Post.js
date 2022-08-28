@@ -12,7 +12,7 @@ const Post = ({ val }) => {
         <img
           className="rounded-md object-cover w-full h-48"
           src={val.image[0]}
-          alt=""
+          alt="food"
         />
         <p className="font-semibold text-black text-xl mt-2">{val.name}</p>
         <Box direction="row" className="mt-2">
