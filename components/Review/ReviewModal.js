@@ -67,7 +67,6 @@ const ReviewModal = ({isOpen, onClose, categories, rId, isUpdate, defaultReview}
         if (!like) {
             delete data['favorite'];
         }
-        console.log(data);
         mutation.mutate(data);
         // if (file !== undefined) formData.append('file', file);
     }

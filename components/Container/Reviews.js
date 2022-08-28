@@ -16,10 +16,6 @@ const Reviews = ({ id }) => {
 
     const { status, data, error } = useQuery('reviews', getReviews); 
 
-    // if (status === 'success') {
-    //     console.log(data);
-    // }
-
     return status === 'success' ? 
         data.data.length > 0 ? data.data.map((val) => (
             <Post val={val} key={val.id} rId={id} />
@@ -37,10 +33,6 @@ const ReviewContainer = ({ id }) => {
     }
 
     const { status, data, error } = useQuery('resto', getDetailResto); 
-
-    if (status === 'success') {
-        console.log(data);
-    }
 
     return ( status === 'success' && data ? <>
         <DetailResto data={data} />

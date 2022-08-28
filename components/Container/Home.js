@@ -15,14 +15,10 @@ const Home = () => {
 
     const { status, data, error } = useQuery("location", getLocation);
 
-    if (status === 'success') {
-        console.log(data.data);
-    }
     const { register, handleSubmit, formState: { errors } } = useForm();
     const router = useRouter();
 
     const onSubmit = data => {
-    //   console.log(data);
       router.push(`/foodlist/${data?.data?.id}`);
     }
 

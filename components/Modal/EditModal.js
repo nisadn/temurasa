@@ -22,7 +22,6 @@ const EditModal = ({isOpen, onClose, review}) => {
         if (!like) {
             delete data['favorite'];
         }
-        console.log(data);
         // formData.append("language", data.language);
         // formData.append("content", data.content);
         // formData.append("like", data.like === 'yes');
