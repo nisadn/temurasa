@@ -15,6 +15,8 @@ import {
 import { useForm } from "react-hook-form";
 import { HiSearch, HiHeart } from "react-icons/hi";
 import Post from "../../components/RestoList/Post";
+import { useRouter } from "next/router";
+import RestoList from "../../components/RestoList/RestoList";
 
 const RestoPage = () => {
   const {
@@ -22,6 +24,9 @@ const RestoPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
+  const id = router.query.id;
 
   return (
     <Layout
@@ -53,10 +58,10 @@ const RestoPage = () => {
         </InputGroup>
       </div>
 
-      <div className="lg:flex mt-8">
-        <div className="lg:w-2/12 w-full">
+      <div className="lg:flex mt-8 gap-8 lg:pl-20">
+        {/* <div className="lg:w-2/12 w-full mb-8">
           <p className="font-medium text-black text-lg mb-2">Location</p>
-          <Flex direction="column" w="200px" gap="1">
+          <Flex direction="column" w="full" gap="1" >
             <Select
               placeholder="Select option"
               w="full"
@@ -87,12 +92,11 @@ const RestoPage = () => {
               </Checkbox>
             ))}
           </Stack>
-        </div>
-        <div className="lg:w-10/12 w-full lg:flex lg:flex-wrap gap-4">
-          {resto.map((val) => (
-            <Post val={val} key={val.id} />
-          ))}
-        </div>
+        </div> */}
+        {/* <div className="bg-blue-100"> */}
+
+        {id ? <RestoList id={id} /> : <p>Loading...</p>}
+        {/* </div> */}
       </div>
     </Layout>
   );
@@ -127,29 +131,5 @@ const locations = [
   {
     id: "3",
     name: "Bali",
-  },
-];
-
-const resto = [
-  {
-    id: "1",
-    name: "Sate Lalat Pak Kandes",
-    badge: ["Lontong", "Sate"],
-    image: "/assets/images/RujakCingur.jpg",
-    reviews: 24,
-  },
-  {
-    id: "2",
-    name: "Soto Pak Abas",
-    badge: ["Lontong", "Sate"],
-    image: "/assets/images/RujakCingur.jpg",
-    reviews: 14,
-  },
-  {
-    id: "3",
-    name: "Rujak Cingur",
-    badge: ["Lontong", "Sate"],
-    image: "/assets/images/RujakCingur.jpg",
-    reviews: 27,
   },
 ];

@@ -34,7 +34,7 @@ const ReviewContainer = ({ id }) => {
 
     const { status, data, error } = useQuery('resto', getDetailResto); 
 
-    return ( status === 'success' && data ? <>
+    return ( status === 'success' && data && data.foods ? <>
         <DetailResto data={data} />
         <Flex direction='column' w='full' >
             <Flex h='fit-content' mb='2'>
