@@ -16,13 +16,12 @@ const BackgroundLayout = ({ title, desc, children }) => {const isLogin = useSele
     useEffect(() => {
       if (isLogin && Date.parse(account.tokens.access.expires) < Date.now()) {
           if (Date.parse(account.tokens.refresh.expires) < Date.now()) {
-            console.log('mau refresh');
             const hitRefreshApi = async () => {
               await authApi.refresh({
                 refreshToken: `${account.tokens.refresh.token}`
               }).then((res) => {
-                console.log(res);
-              })
+                dispatch(refresh(res));
+            })
             }
   
             hitRefreshApi();

@@ -70,8 +70,9 @@ const Navbar = ({page}) => {
                         borderColor='white'
                         border='1px'
                         fontWeight='bold'
-                        ml='2'
+                        mr='2'
                         textAlign='center'
+                        display={['none','none','block']}
                     >
                         Hi, {account.user.name.split(' ')[0]}
                     </Box>
@@ -111,7 +112,17 @@ const Navbar = ({page}) => {
             <DrawerContent>
             <DrawerCloseButton mt='4' mr='5' />
             <DrawerBody>
-                    <Flex direction='column' gap={5} my='15%' mx='10%'>
+                    <Flex direction='column' gap={5} my='15%' mx='10%' align='center'>   
+                    {isLogin && 
+                        <Box w='fit-content' px='4' py='2'
+                            borderColor='white'
+                            border='1px'
+                            fontWeight='bold'
+                            textAlign='center'
+                        >
+                            Hi, {account.user.name.split(' ')[0]}
+                        </Box>
+                    }
                     <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
                     {isLogin ? 
                         <NavbarMenu page={page} onClick={() => {

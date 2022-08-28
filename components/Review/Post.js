@@ -32,11 +32,11 @@ const Post = ({val, rId}) => {
                 </Flex>
                 <Text>{val.content}</Text>
                 <Text fontWeight='semibold'><Icon as={FaStar} color='yellow.400' /> {val.rating}</Text>
-                {val.image && 
+                {/* {val.image && 
                     <Flex w='fit-content' mt='4'>
                         <Image src={val.image} alt={val.id} className={styles.imgReviewImage} width='450px' height='250px' />
                     </Flex>
-                }
+                } */}
             </Flex>
         </Flex>
     )

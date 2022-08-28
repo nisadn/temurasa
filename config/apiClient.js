@@ -35,7 +35,7 @@ axiosClient.interceptors.response.use(
             await authApi.refresh({
               refreshToken: `${state.auth.account.tokens.refresh.token}`
             }).then((res) => {
-              console.log(res);
+              state.auth.account.tokens = res;
             })
           }
 
@@ -43,9 +43,11 @@ axiosClient.interceptors.response.use(
         } catch {
           console.log("expired refresh token");
           localStorage.clear();
-          router.push('/login');
+          window.location.href = '/login';
           // return Promise.reject(error);
         }
+      } else if (res.status == 401) {
+          window.location.href = '/login';
       }
       // console.log(res);
     //   if (res.status == 401) {

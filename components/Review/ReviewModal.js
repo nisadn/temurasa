@@ -12,11 +12,11 @@ const ReviewModal = ({isOpen, onClose, categories, rId, isUpdate, defaultReview}
     const { register, handleSubmit, formState: { errors }, control } = useForm();
     const [ like, setLike ] = useState(false);
 
-    const [file, setFile] = useState();
-    const [value, setValue] = useState();
-    const [filePreview, setFilePreview] = useState({
-        preview: '',
-    });
+    // const [file, setFile] = useState();
+    // const [value, setValue] = useState();
+    // const [filePreview, setFilePreview] = useState({
+    //     preview: '',
+    // });
     
     const FormData = require('form-data');
     const formData = new FormData();
@@ -58,9 +58,9 @@ const ReviewModal = ({isOpen, onClose, categories, rId, isUpdate, defaultReview}
     });
     
     const onSubmit = data => {
-        if (filePreview.preview === '') {
-            delete data['file'];
-        }
+        // if (filePreview.preview === '') {
+        //     delete data['file'];
+        // }
 
         data['restaurantId'] = rId;
         delete data['like'];
@@ -85,7 +85,7 @@ const ReviewModal = ({isOpen, onClose, categories, rId, isUpdate, defaultReview}
                 <Flex direction='column' gap='6'>
 
                 <FormControl isInvalid={errors.content !== undefined}>
-                    <FormLabel fontWeight={'semibold'}>Write your review <span className="text-red-400">*</span></FormLabel>
+                    <FormLabel fontWeight={'semibold'}>{isUpdate ? 'Content' : 'Write your review'} <span className="text-red-400">*</span></FormLabel>
                     <Textarea
                         placeholder='Write here'
                         defaultValue={defaultReview?.content}
@@ -95,7 +95,7 @@ const ReviewModal = ({isOpen, onClose, categories, rId, isUpdate, defaultReview}
                     <FormErrorMessage>This field is required</FormErrorMessage>
                 </FormControl>
 
-                <FormControl>
+                {/* <FormControl>
                     <FormLabel>
                         Add an image to your review
                     </FormLabel>
@@ -121,7 +121,7 @@ const ReviewModal = ({isOpen, onClose, categories, rId, isUpdate, defaultReview}
                         <p>Current Image is</p> <span className="font-semibold"> Empty</span>
                     </div>
                     )}
-                </div>
+                </div> */}
 
                 {!isUpdate && <>
                 

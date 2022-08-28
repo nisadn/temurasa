@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authApi } from "../../config/services/authApi";
-import { logout } from "../../redux/features/authSlice";
+import { logout, refresh } from "../../redux/features/authSlice";
 import Navbar from "../Menu/Navbar";
 
 const Layout = ({ title, desc, children }) => {
@@ -17,12 +17,11 @@ const Layout = ({ title, desc, children }) => {
   useEffect(() => {
     if (isLogin && Date.parse(account.tokens.access.expires) < Date.now()) {
         if (Date.parse(account.tokens.refresh.expires) < Date.now()) {
-          console.log('mau refresh');
           const hitRefreshApi = async () => {
             await authApi.refresh({
               refreshToken: `${account.tokens.refresh.token}`
             }).then((res) => {
-              console.log(res);
+              dispatch(refresh(res));
             })
           }
 
