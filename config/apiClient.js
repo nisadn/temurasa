@@ -1,5 +1,6 @@
 import axios from "axios";
 import { store } from '../redux/store';
+import { authApi } from "./services/authApi";
 
 const axiosClient = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API,
@@ -26,7 +27,28 @@ axiosClient.interceptors.response.use(
       return response;
     }, 
     function (error) {
-      // let res = error.response;
+      let res = error.response;
+      const state = store.getState();
+      if (res.status == 401 && state.auth.isLogin) {
+        try {
+          const hitRefreshApi = async () => {
+            await authApi.refresh({
+              refreshToken: `${state.auth.account.tokens.refresh.token}`
+            }).then((res) => {
+              state.auth.account.tokens = res;
+            })
+          }
+
+          hitRefreshApi();
+        } catch {
+          console.log("expired refresh token");
+          localStorage.clear();
+          window.location.href = '/login';
+          // return Promise.reject(error);
+        }
+      } else if (res.status == 401) {
+          window.location.href = '/login';
+      }
       // console.log(res);
     //   if (res.status == 401) {
     //     window.location.href = “https://example.com/login”;

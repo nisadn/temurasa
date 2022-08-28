@@ -17,4 +17,20 @@ export const reviewApi = {
             return Promise.reject(error);
         }
     },
+    editReview: async (id, data) => {
+        try {
+            const res = await axiosClient.put(`/v1/restaurants/reviews/${id}`, data);
+            return res;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    },
+    deleteReview: async (id) => {
+        try {
+            const res = await axiosClient.delete(`/v1/restaurants/reviews/${id}`);
+            return res;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    },
 }
