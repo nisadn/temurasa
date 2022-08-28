@@ -33,16 +33,17 @@ const RestoPage = () => {
       title={"Welcome to TemuRasa!"}
       desc="TemuRasa: Find Your Taste in Indonesia"
     >
-      <div className="w-full items-center justify-center">
+      <div className="w-full items-center justify-center mb-14">
         <p className="font-semibold text-black lg:text-5xl text-2xl text-center">
-          Recomended Restaurants in{" "}
+          Recomended{' '}
           <span className="font-semibold text-primary lg:text-5xl text-2xl text-center">
-            Madura
+            Gurame
           </span>
+          {' '}Restaurants
         </p>
       </div>
 
-      <div className="w-full flex items-center justify-center mt-8">
+      {/* <div className="w-full flex items-center justify-center mt-8">
         <InputGroup width={"550px"}>
           <Input
             placeholder="Search"
@@ -56,7 +57,7 @@ const RestoPage = () => {
             children={<Box as={HiSearch} color="#000000" size={24} />}
           ></InputRightElement>
         </InputGroup>
-      </div>
+      </div> */}
 
       <div className="lg:flex mt-8 gap-8 lg:pl-20">
         {/* <div className="lg:w-2/12 w-full mb-8">
