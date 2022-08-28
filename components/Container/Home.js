@@ -1,17 +1,29 @@
 import { Button, Flex, Select, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import { locationApi } from '../../config/services/locationApi';
 
 import BackgroundLayout from '../Layout/BackgroundLayout';
 import Navbar from '../Menu/Navbar';
 
 const Home = () => {
+    const getLocation = async () => {
+        const res = await locationApi.getLocation();
+        return res.data;
+    }
+
+    const { status, data, error } = useQuery("location", getLocation);
+
+    if (status === 'success') {
+        console.log(data.data);
+    }
     const { register, handleSubmit, formState: { errors } } = useForm();
     const router = useRouter();
 
     const onSubmit = data => {
     //   console.log(data);
-      router.push(`/foodlist/${data.location}`);
+      router.push(`/foodlist/${data?.data?.id}`);
     }
 
     return (
@@ -38,7 +50,7 @@ const Home = () => {
                         <Select placeholder='Select option' w='full' borderColor='blue.600' 
                             {...register("location", {required: true})}
                             >
-                            {locations.map((val) => (
+                            {data?.data.map((val) => (
                                 <option value={val.id} key={val.id}>{val.name}</option>
                                 ))}
                         </Select>

@@ -1,9 +1,11 @@
-import { Stack, Badge, Checkbox, Select,
-  Flex,
-  Text } from "@chakra-ui/react";
+import { Stack, Badge, Checkbox, Select, Flex, Text } from "@chakra-ui/react";
 /* eslint-disable @next/next/no-img-element */
 import { HiHeart } from "react-icons/hi";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useQuery } from 'react-query';
+import { foodApi } from "../../config/services/foodApi";
+import { useEffect } from "react";
 
 const Post = ({ isAllFoods }) => {
   const {
@@ -11,31 +13,39 @@ const Post = ({ isAllFoods }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+
+  const getFoods = async (data) => {
+    return res.data;
+  };
+
+  const { status, data, error } = useQuery("foods", getFoods);
+
   return (
     <div className="lg:flex mt-8">
       <div className="lg:w-2/12 w-full">
-        {isAllFoods && 
-        <div className="allfood">
-          <p className="font-medium text-black text-lg mb-2">Location</p>
-          <Flex direction="column" w="200px" gap="1" mb="2">
-            <Select
-              placeholder="Select option"
-              w="full"
-              borderColor="blue.600"
-              {...register("location", { required: true })}
-            >
-              {locations.map((val) => (
-                <option value={val.id} key={val.id}>
-                  {val.name}
-                </option>
-              ))}
-            </Select>
-            {errors.location?.type === "required" && (
-              <Text color="red.500">Please select your destination</Text>
-            )}
-          </Flex>
-        </div>
-        }
+        {isAllFoods && (
+          <div className="allfood">
+            <p className="font-medium text-black text-lg mb-2">Location</p>
+            <Flex direction="column" w="200px" gap="1" mb="2">
+              <Select
+                placeholder="Select option"
+                w="full"
+                borderColor="blue.600"
+                {...register("location", { required: true })}
+              >
+                {locations.map((val) => (
+                  <option value={val.id} key={val.id}>
+                    {val.name}
+                  </option>
+                ))}
+              </Select>
+              {errors.location?.type === "required" && (
+                <Text color="red.500">Please select your destination</Text>
+              )}
+            </Flex>
+          </div>
+        )}
         <p className="font-semibold text-black text-xl mb-2">Filters</p>
         <Stack spacing={2} direction="column">
           {filters.map((val) => (
