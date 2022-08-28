@@ -1,7 +1,11 @@
-import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, InputRightElement, Link, Text } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, InputRightElement, Link, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import { authApi } from "../../config/services/authApi";
+import { login } from "../../redux/features/authSlice";
 import BackgroundLayout from "../Layout/BackgroundLayout";
 
 const Account = ({isRegister}) => {
@@ -9,10 +13,54 @@ const Account = ({isRegister}) => {
     const router = useRouter();
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
+    const toast = useToast();
+    const dispatch = useDispatch();
+
+    const postLogin = async (data) => {
+        let res;
+        if (isRegister) {
+            res = await authApi.register(data);
+        } else {
+            res = await authApi.login(data)
+        }
+        return res;
+    }
+
+    const mutation = useMutation(postLogin, {
+        onError: (err) => {
+            toast({
+                title: `${err.response.data.message}`,
+                status: 'error',
+                variant: 'left-accent',
+                position: 'top',
+                duration: 3000,
+                isClosable: true,
+            });
+        },
+        onSuccess: () => {
+            toast({
+                title: `${isRegister ? 'Registration' : 'Login'} success`,
+                variant: 'left-accent',
+                status: 'success',
+                position: 'top',
+                duration: 3000,
+                isClosable: true,
+            });
+        }
+    });
 
     const onSubmit = data => {
-        console.log(data);
+        mutation.mutate(data);
     }
+
+    if (mutation.isSuccess) {
+        if (isRegister) {
+            router.push('/login');
+        } else {
+            dispatch(login(mutation.data));
+            router.push('/');
+        }
+    } 
 
     return (
         <BackgroundLayout title={`${isRegister ? 'Register' : 'Login'} to TemuRasa`} desc='TemuRasa: Login to access more features'>
@@ -85,7 +133,7 @@ const Account = ({isRegister}) => {
                             </FormControl>
 
                         <Button px='10' type='submit' colorScheme='blue'
-                            // isLoading={mutation.isLoading} 
+                            isLoading={mutation.isLoading} 
                         mt='6' >
                             {isRegister ? 'Register' : 'Login'}
                         </Button>
