@@ -1,5 +1,5 @@
 import { HiMenu } from "react-icons/hi";
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Flex, IconButton, useDisclosure, useToast } from "@chakra-ui/react"
+import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Flex, IconButton, useDisclosure, useToast } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import NavbarMenu from "./NavbarMenu";
 import { useSelector } from 'react-redux';
@@ -46,6 +46,7 @@ const Navbar = ({page}) => {
     }
 
     const isLogin = useSelector((state) => state.auth.isLogin);
+    const account = useSelector((state) => state.auth.account);
 
     return (
         <Flex direction='column'>
@@ -64,6 +65,17 @@ const Navbar = ({page}) => {
                 <Flex w='full' fontWeight='bold' fontSize='3xl' pl={[2,2,4]}>
                     <p className="tracking-widest">TemuRasa</p>
                 </Flex>
+                {isLogin && 
+                    <Box w='15%' px='4' py='2'
+                        borderColor='white'
+                        border='1px'
+                        fontWeight='bold'
+                        ml='2'
+                        textAlign='center'
+                    >
+                        Hi, {account.user.name.split(' ')[0]}
+                    </Box>
+                }
                 <Flex display={['none', 'none', 'flex']} gap={2} >
                 <NavbarMenu page={page} href='/' isActive={page === 'home'}>Home</NavbarMenu>
                 {isLogin ? 
